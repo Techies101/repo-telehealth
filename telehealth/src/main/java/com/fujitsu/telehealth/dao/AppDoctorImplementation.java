@@ -234,7 +234,7 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 	}
 
 	@Override
-	public boolean changeMethod() {
+	public boolean sendEmailVerification() {
 		// TODO Auto-generated method stub
 		return false;
 	}
