@@ -1,16 +1,23 @@
 package com.fujitsu.telehealth.dao;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.Part;
 
 import com.fujitsu.telehealth.model.AppRequestByPatient;
 import com.fujitsu.telehealth.model.AppointmentModel;
 import com.fujitsu.telehealth.model.AppointmentModel2;
+import com.fujitsu.telehealth.model.LabModel;
 import com.fujitsu.telehealth.model.LoginModel;
 import com.fujitsu.telehealth.model.PatientModel;
 import com.fujitsu.telehealth.utils.DBConnection;
@@ -281,6 +288,70 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			con.close();
 		}
 		return tbl_appointment;
+	}
+
+	public void paymentImage(int id, Part image) throws ClassNotFoundException, SQLException, IOException {
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement preparedStatement = con.prepareStatement(SQL_UPLOAD_PROOF_PAYMENT);
+			InputStream is = image.getInputStream();
+			preparedStatement.setBlob(1, is);
+			preparedStatement.setFloat(2, id);
+			preparedStatement.executeUpdate();
+		} catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		} finally {
+			con.close();
+		}
+	}
+
+	public void labImage(String uid, Part image) throws SQLException, IOException {
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement preparedStatement = con.prepareStatement(SQL_UPLOAD_LAB_HISTORY);
+			Date date = new Date();
+			SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE MMM d,yyyy");
+			SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
+			String dateAsString = dateFormatter.format(date);
+			String timeAsString = timeFormatter.format(date);
+			InputStream is = image.getInputStream();
+			preparedStatement.setString(1, uid);
+			preparedStatement.setBlob(2, is);
+			preparedStatement.setString(3, dateAsString);
+			preparedStatement.setString(4, timeAsString);
+			preparedStatement.executeUpdate();
+		} catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		} finally {
+			con.close();
+		}
+	}
+
+	public List<LabModel> labImageList(String th_uid) throws ClassNotFoundException, SQLException, IOException {
+		List<LabModel> lab = new ArrayList<>();
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement preparedStatement = con.prepareStatement(SQL_LAB_BY_PATIENT);
+			preparedStatement.setString(1, th_uid);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("th_id");
+				String date = rs.getString("th_date");
+				String time = rs.getString("th_time");
+				String uid = rs.getString("th_uid");
+				Blob blob = rs.getBlob("th_image");
+				lab.add(new LabModel(id, date, time, uid, blob));
+			}
+		} catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		} finally {
+			con.close();
+		}
+		return lab;
 	}
 
 }

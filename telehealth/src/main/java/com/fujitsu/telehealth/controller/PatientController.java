@@ -16,9 +16,6 @@ import org.apache.commons.lang.RandomStringUtils;
 
 import com.fujitsu.telehealth.dao.AppDoctorImplementation;
 import com.fujitsu.telehealth.dao.AppPatientImplementation;
-import com.fujitsu.telehealth.dao.Image2DAO;
-import com.fujitsu.telehealth.dao.ImageDAO;
-import com.fujitsu.telehealth.dao.ImageListDAO;
 import com.fujitsu.telehealth.model.AppRequestByPatient;
 import com.fujitsu.telehealth.model.AppointmentModel;
 import com.fujitsu.telehealth.model.AppointmentModel2;
@@ -30,9 +27,6 @@ public class PatientController {
 
 	AppPatientImplementation AppPatientImpl = new AppPatientImplementation();
 	AppDoctorImplementation AppDoctorImpl = new AppDoctorImplementation();
-	ImageDAO imageDao = new ImageDAO();
-	Image2DAO imageDao2 = new Image2DAO();
-	ImageListDAO imageListDao = new ImageListDAO();
 
 	// Page Dispatcher
 	public void dispatcher(String page, HttpServletRequest request, HttpServletResponse response)
@@ -223,11 +217,10 @@ public class PatientController {
 
 	public void uploadImage(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, ClassNotFoundException {
-
 		int id = Integer.parseInt(request.getParameter("imageId"));
 		System.out.println(request.getPart("image"));
 		Part part = request.getPart("image");
-		imageDao.paymentImage(id, part);
+		AppPatientImpl.paymentImage(id, part);
 		dispatcher("patient-dashboard.jsp", request, response);
 	}
 
@@ -236,8 +229,7 @@ public class PatientController {
 			throws SQLException, IOException, ServletException {
 		List<PatientModel> listPatient = AppDoctorImpl.selectAllPatients();
 		request.setAttribute("listPatient", listPatient);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
-		dispatcher.forward(request, response);
+		dispatcher("patient-list.jsp", request, response);
 	}
 
 	// Details of Patient
@@ -245,8 +237,7 @@ public class PatientController {
 			throws ServletException, IOException, SQLException {
 		PatientModel detailsPatient = AppDoctorImpl.selectPatient(request.getParameter("id"));
 		request.setAttribute("detailsPatient", detailsPatient);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-details.jsp");
-		dispatcher.forward(request, response);
+		dispatcher("patient-details.jsp", request, response);
 	}
 
 	// Consultation History of Patient
@@ -254,8 +245,7 @@ public class PatientController {
 			throws ServletException, IOException, SQLException {
 		List<AppointmentModel> patientConsultation = AppDoctorImpl.selectConsultation(request.getParameter("id"));
 		request.setAttribute("patientConsultation", patientConsultation);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-consultation-history.jsp");
-		dispatcher.forward(request, response);
+		dispatcher("patient-laboratory-history.jsp", request, response);
 	}
 
 	// Laboratory History of Patient
@@ -263,11 +253,9 @@ public class PatientController {
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		HttpSession session = request.getSession();
 		String th_uid = (String)session.getAttribute("uid");
-		List<LabModel> patientLaboratory = imageListDao.labImageList(th_uid);
+		List<LabModel> patientLaboratory = AppPatientImpl.labImageList(th_uid);
 		request.setAttribute("patientLaboratory", patientLaboratory);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-laboratory-history.jsp");
-		dispatcher.forward(request, response);
-
+		dispatcher("patient-laboratory-history.jsp", request, response);
 	}
 
 	// Laboratory History of Patient (Patient Side)
@@ -277,8 +265,7 @@ public class PatientController {
 		String uid = (String) session.getAttribute("uid");
 		List<LabModel> patientLab = AppDoctorImpl.labImageList(uid);
 		request.setAttribute("patientLab", patientLab);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-history.jsp");
-		dispatcher.forward(request, response);
+		dispatcher("patient-history.jsp", request, response);
 	}
 
 	// Upload Lab Image (Patient Side)
@@ -287,11 +274,10 @@ public class PatientController {
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("uid");
 		Part part = request.getPart("image");
-		imageDao2.labImage(uid, part);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
-		dispatcher.forward(request, response);
-		// response.sendRedirect("/TelehealthService/patient-list.jsp");
-
+		AppPatientImpl.labImage(uid, part);
+		dispatcher("patient-list.jsp", request, response);
 	}
+	
+	
 
 }

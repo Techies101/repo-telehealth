@@ -1,6 +1,6 @@
-<%@ page language="java" pageEncoding="UTF-8"
-	import="com.fujitsu.telehealth.controller.WebServiceController"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <!--Navigation-->
 <div class="navigation border">
@@ -12,7 +12,6 @@
 			<i class="fas fa-laptop-medical fa-2x logo"></i> <b class="logo">
 				&nbsp; Online Telehealth Services</b>
 		</a>
-
 
 		<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 			<c:choose>

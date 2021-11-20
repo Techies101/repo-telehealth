@@ -37,7 +37,6 @@ public class DoctorController {
 
 		// SEND DATA BACK TO JSP
 		dispatcher("doctor-dashboard.jsp", request, response);
-		// response.sendRedirect("_patientappointment.jsp");
 	}
 
 	// Update Meeting Link
@@ -78,7 +77,6 @@ public class DoctorController {
 		String type = request.getParameter("approvetype");
 		appDao.approveMeeting(id, type);
 		dispatcher("doctor-dashboard.jsp", request, response);
-//		response.sendRedirect("/TelehealthService/display.jsp");
 	}
 
 }

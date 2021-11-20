@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -30,8 +29,7 @@
 			<h4 class="text-left border-bottom">Account Information</h4>
 				<tr>
 					<th>First name:</th>
-					<td><c:out value="${detailsPatient.th_fname}" /></td>
-					<br>
+					<td><c:out value="${detailsPatient.th_fname}" /></td><br>
 					<th>Middle Name:</th>
 					<td><c:out value="${detailsPatient.th_middle_name}" /></td>
 					<br>

@@ -67,26 +67,26 @@ table td{
 				response.sendRedirect("doctor-dashboard.jsp");
 	%>
 	<%@include file="includes/_header.jsp"%>
-		<div class="container-search ">
+	<div class="container-search ">
 		<form action="patient-dashboard" class="py-3 d-flex" method="post">
-		<select name="dropdown" id="list" class="form-select mr-2">
-			<option value="All" selected
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Pending")) {%>
-				 <%}%>>All</option>
-			<option value="Pending"
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Pending")) {%>
-				selected <%}%>>Pending</option>
-			<option value="Payment"
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Payment")) {%>
-				selected <%}%>>Payment</option>
-			<option value="Done"
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Done")) {%>
-				selected <%}%>>Done</option>
-			<option value="Declined"
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Declined")) {%>
-				selected <%}%>>Declined</option>
-		</select>
-		<button type="submit" class="btn btn-primary" >Search</button>
+			<select name="dropdown" id="list" class="form-select mr-2">
+				<option value="All" selected
+					<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Pending")) {%>
+					 <%}%>>All</option>
+				<option value="Pending"
+					<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Pending")) {%>
+					selected <%}%>>Pending</option>
+				<option value="Payment"
+					<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Payment")) {%>
+					selected <%}%>>Payment</option>
+				<option value="Done"
+					<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Done")) {%>
+					selected <%}%>>Done</option>
+				<option value="Declined"
+					<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Declined")) {%>
+					selected <%}%>>Declined</option>
+			</select>
+			<button type="submit" class="btn btn-primary" >Search</button>
 		</form>
 
 	<table id="appointment" class="groove border">
@@ -99,8 +99,8 @@ table td{
 				<th>Action</th>
 			</tr>
 		</thead>
-		<tbody>
 		
+		<tbody>
 			<c:forEach var="a" items="${meeting}">
 				<c:if test="${dropdown == a.meetingStatus || dropdown == 'All'}">
 					<tr>
@@ -108,22 +108,15 @@ table td{
 						<td><c:out value="${a.meetingDate}" /></td>
 						<td><c:out value="${a.meetingTime}" /></td>
 						<td style="align-items: center;"><c:out value="${a.meetingStatus}" /></td>
-						
 						<c:choose>
-						<c:when test="${a.meetingStatus == 'Pending' || a.meetingStatus == 'Payment'}">
-						<td class="d-flex flex-end">
-							<button id="cancel${a.meetingNumber}" class="btn btn-primary">Cancel</button>
-						<c:if test="${a.meetingStatus == 'Payment'}">
-						<input type="button" onclick="location.href='payment.jsp';" class="btn btn-primary" value="Pay"/>
-					 	<button id="view${a.meetingNumber}" class="btn btn-primary">View</button>					 	
-			            <button id="upload${a.meetingNumber}" class="btn btn-primary">Upload</button>
-				       <!-- <form action="uploadImage" method="post" enctype="multipart/form-data">
-				        
-			              <input type="file" name="image" required="required"/><br/><br/>
-			            <input type="hidden" name="imageId" value ="${a.meetingNumber}" required="required"/><br/><br/>
-			            <input type="submit"/>
-			        	</form>-->
-						</c:if>
+							<c:when test="${a.meetingStatus == 'Pending' || a.meetingStatus == 'Payment'}">
+								<td class="d-flex flex-end">
+									<button id="cancel${a.meetingNumber}" class="btn btn-primary">Cancel</button>
+							<c:if test="${a.meetingStatus == 'Payment'}">
+								<input type="button" onclick="location.href='payment.jsp';" class="btn btn-primary" value="Pay"/>
+							 	<button id="view${a.meetingNumber}" class="btn btn-primary">View</button>					 	
+					            <button id="upload${a.meetingNumber}" class="btn btn-primary">Upload</button>
+							</c:if>
 									<script>
         	
 									var a = document.getElementById('upload'+${a.meetingNumber});
@@ -257,12 +250,9 @@ table td{
 </div>
 
 
-
 	<%@include file="includes/_linksfooter.jsp"%>
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="assets/js/modal.js"></script>
-	
-	
 </html>

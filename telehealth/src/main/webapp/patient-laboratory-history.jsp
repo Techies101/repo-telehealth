@@ -136,7 +136,9 @@ height: 100vh !important;
 
 	<footer class="py-3 my-4 mt-5 systemfooter ">
 		<ul class="nav justify-content-center pb-3 mb-3">
-			<p class="text-center">Service you can always count on</p>
+			<ul>
+				<p class="text-center">Service you can always count on</p>
+			</ul>
 		</ul>
 		<p class="text-center text-muted">&copy; 2021 Online Telehealth
 			Services, Inc</p>
