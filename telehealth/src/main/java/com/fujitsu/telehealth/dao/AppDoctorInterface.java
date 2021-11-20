@@ -28,5 +28,6 @@ public interface AppDoctorInterface {
 	
 	boolean sayHi();
 	
+	boolean veryGood();
 }
 	
