@@ -38,15 +38,6 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 				String remarks = rs.getString("th_remarks");
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
-				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
-				// response.setContentType("image/gif");
-				// OutputStream os = r.getOutputStream();
-				// os.write(byteArray);
-				// os.flush();
-				// os.close();
-
-				// Part image = rs.getInt("th_id");
-
 				meeting.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks, number,
 						blob));
 			}
@@ -99,10 +90,13 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 		}
 		return result;
 	}
-
+	
+	
+	// Approve Meeting
 	public void approveMeeting(int id, String type) throws SQLException {
 		String command = null;
 		Connection con = null;
+		
 		if (type.equals("Pending"))
 			command = SQL_PENDING_STATUS;
 		if (type.equals("Payment"))
@@ -120,7 +114,7 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 		}
 
 	}
-
+	
 	@Override
 	public List<PatientModel> selectAllPatients() throws SQLException {
 		List<PatientModel> tbl_patient = new ArrayList<>();
@@ -175,7 +169,9 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 		}
 		return tbl_patient;
 	}
-
+	
+	
+	// Select Consultation
 	@Override
 	public List<AppointmentModel> selectConsultation(String uid) throws SQLException {
 		List<AppointmentModel> tbl_appointment = new ArrayList<>();
@@ -196,7 +192,6 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 				String th_remarks = rs.getString("th_remarks");
 				int th_id = rs.getInt("th_id");
 				Blob th_image = rs.getBlob("th_image");
-
 				tbl_appointment.add(new AppointmentModel(th_doctor, th_patient, th_date, th_time, th_status, th_link,
 						th_comment, th_remarks, th_id, uid, th_image));
 			}
