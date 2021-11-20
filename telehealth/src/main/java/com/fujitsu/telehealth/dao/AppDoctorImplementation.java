@@ -233,4 +233,10 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 		return lab;
 	}
 
+	@Override
+	public boolean changeMethod() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
