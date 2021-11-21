@@ -26,8 +26,5 @@ public interface AppDoctorInterface {
 	
 	List<LabModel> labImageList(String uid) throws SQLException;
 	
-	// Comment
-	//add comment
-	//try comment
 }
 	
