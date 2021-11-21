@@ -286,6 +286,7 @@ public class PatientController {
 		String img = AppPatientImpl.getImage(uid);
 		request.setAttribute("img", img);
 		dispatcher("patient-dashboard.jsp", request, response);
+		// Hello World!
 	}
 	
 }

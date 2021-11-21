@@ -28,7 +28,6 @@ public interface AppDoctorInterface {
 	
 	// Comment
 	//add comment
-
 	
 }
 	
