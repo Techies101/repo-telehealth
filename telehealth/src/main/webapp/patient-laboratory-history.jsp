@@ -9,23 +9,23 @@
 
 <style>
 @import
-	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');	
+	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap')
+	;
 
 .swal2-input {
 	border: 1px !important;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    	background-color: #1c87c9 !important;
-    	font-family: 'Montserrat' !important;
-    	margin-left: .5rem;
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited
+	{
+	background-color: #1c87c9 !important;
+	font-family: 'Montserrat' !important;
+	margin-left: .5rem;
 }
 
-table td{
+table td {
 	font-family: 'Montserrat', sans-serif !important;
-	
 }
-
 
 .container-search {
 	width: 60rem;
@@ -37,36 +37,49 @@ table td{
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: #1c87c9;	
+	background-color: #1c87c9;
 	color: white;
 }
 
 body {
-height: 100vh !important;
+	height: 100vh !important;
 }
-<%@include file="assets/stylesheet/main.css"%>
-</style>	<%@include file="includes/_linkshead.jsp"%>
-	<link rel="stylesheet" href="assets/stylesheet/header.css">
-	
+<%@
+include
+ 
+file
+="
+assets
+/
+stylesheet
+/
+main
+.css
+"%
+>
+</style>
+<%@include file="includes/_linkshead.jsp"%>
+<link rel="stylesheet" href="assets/stylesheet/header.css">
+
 <style>
 @import
-	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');	
+	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap')
+	;
 
 .swal2-input {
 	border: 1px !important;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    	background-color: #1c87c9 !important;
-    	font-family: 'Montserrat' !important;
-    	margin-left: .5rem;
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited
+	{
+	background-color: #1c87c9 !important;
+	font-family: 'Montserrat' !important;
+	margin-left: .5rem;
 }
 
-table td{
+table td {
 	font-family: 'Montserrat', sans-serif !important;
-	
 }
-
 
 .container-search {
 	width: 60rem;
@@ -78,14 +91,13 @@ table td{
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: #1c87c9;	
+	background-color: #1c87c9;
 	color: white;
 }
 
 body {
-height: 100vh !important;
+	height: 100vh !important;
 }
-
 <%@include file="assets/stylesheet/main.css"%>
 </style>
 </head>
@@ -102,29 +114,28 @@ height: 100vh !important;
 						<th class="thbg-color">Date</th>
 						<th class="thbg-color">Time</th>
 						<th class="thbg-color">Image</th>
-						
+
 					</tr>
 				</thead>
+				
 				<tbody>
-				<c:forEach var="a" items="${patientLaboratory}">
+					<c:forEach var="a" items="${patientLaboratory}">
 						<tr>
 							<td><c:out value="${a.th_date}" /></td>
 							<td><c:out value="${a.th_time}" /></td>
 							<td>
-							
-							<button id="view${a.th_id}" class="btn btn-primary">View</button>
+								<button id="view${a.th_id}" class="btn btn-primary">View</button>
 							<script>
-									//FOR VIEWING									
-							        document.getElementById('view'+${a.th_id}).addEventListener('click', function(){
-							
-							        	Swal.fire({
-							        		  title: 'Lab Result Image',
-							        		  imageUrl: '_getLabImage.jsp?id='+${a.th_id},
-							        		  imageAlt: 'No Image Uploaded Yet',
-							            	  confirmButtonColor: '#1c87c9'
-							        		})
-							
-							        	});
+								//FOR VIEWING									
+						        document.getElementById('view'+${a.th_id}).addEventListener('click', function(){
+						        	Swal.fire({
+						        		  title: 'Lab Result Image',
+						        		  imageUrl: '_getLabImage.jsp?id='+${a.th_id},
+						        		  imageAlt: 'No Image Uploaded Yet',
+						            	  confirmButtonColor: '#1c87c9'
+						        		})
+						
+						        	});
 							</script>
 							</td>
 						</tr>
@@ -136,9 +147,7 @@ height: 100vh !important;
 
 	<footer class="py-3 my-4 mt-5 systemfooter ">
 		<ul class="nav justify-content-center pb-3 mb-3">
-			<ul>
-				<p class="text-center">Service you can always count on</p>
-			</ul>
+				<li><p class="text-center">Service you can always count on</p></li>
 		</ul>
 		<p class="text-center text-muted">&copy; 2021 Online Telehealth
 			Services, Inc</p>

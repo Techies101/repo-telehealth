@@ -27,30 +27,26 @@
 	<div class="container-search ">
 		<div class="patient-details">
 			<h4 class="text-left border-bottom">Account Information</h4>
+			<table>
 				<tr>
 					<th>First name:</th>
-					<td><c:out value="${detailsPatient.th_fname}" /></td><br>
+					<td><c:out value="${detailsPatient.th_fname}" /><br></td>
 					<th>Middle Name:</th>
-					<td><c:out value="${detailsPatient.th_middle_name}" /></td>
-					<br>
+					<td><c:out value="${detailsPatient.th_middle_name}" /><br></td>
 					<th>Last Name:</th>
-					<td><c:out value="${detailsPatient.th_lname}" /></td>
-					<br>
+					<td><c:out value="${detailsPatient.th_lname}" /><br></td>
 					<th>Age:</th>
-					<td><c:out value="${detailsPatient.th_age}" /></td>
-					<br>
+					<td><c:out value="${detailsPatient.th_age}" /><br></td>
 					<th>Gender:</th>
-					<td><c:out value="${detailsPatient.th_gender}" /></td>
-					<br>
+					<td><c:out value="${detailsPatient.th_gender}" /><br></td>
 					<th>Address:</th>
-					<td><c:out value="${detailsPatient.th_address}" /></td>
-					<br>
+					<td><c:out value="${detailsPatient.th_address}" /><br></td>
 					<th>Email:</th>
-					<td><c:out value="${detailsPatient.th_email}" /></td>
-					<br>
+					<td><c:out value="${detailsPatient.th_email}" /><br></td>
 					<th>Contact Number:</th>
 					<td><c:out value="${detailsPatient.th_contact}" /></td>
 				</tr>
+			</table>
 		</div>
 	</div>
 	<br>
