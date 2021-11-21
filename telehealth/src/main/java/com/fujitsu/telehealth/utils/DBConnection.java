@@ -6,16 +6,16 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	
-	private static String dbURL = "jdbc:mysql://192.168.0.14:3306/?user=pascal";
-	private static String dbUname = "telehealth";
-	private static String dbPass = "1234";
-	private static String dbDriver = "com.mysql.cj.jdbc.Driver";
-
+	private static String dbURL = "jdbc:mysql://192.168.0.32:3306/telehealth?";
+	private static String dbUname = "pascal";
+	private static String pass = "1234";
+	private static String driver = "com.mysql.cj.jdbc.Driver";
+	
 	public static Connection connect() {
 		Connection conn = null;
 		try {
-			Class.forName(dbDriver);
-			conn = DriverManager.getConnection(dbURL, dbUname, dbPass);
+			Class.forName(driver);
+			conn = DriverManager.getConnection(dbURL, dbUname, pass);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

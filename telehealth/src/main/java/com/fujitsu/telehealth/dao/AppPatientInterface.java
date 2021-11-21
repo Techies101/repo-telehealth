@@ -1,5 +1,6 @@
 package com.fujitsu.telehealth.dao;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,4 +30,5 @@ public interface AppPatientInterface {
 	
 	List<AppointmentModel> selectLaboratory(String th_uid) throws SQLException;
 	
-}
+	String getImage(String id) throws SQLException, IOException;
+ }

@@ -278,6 +278,14 @@ public class PatientController {
 		dispatcher("patient-list.jsp", request, response);
 	}
 	
+	// Proof of Payment
+	public void proofOfPayment(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+		String img = AppPatientImpl.getImage(uid);
+		request.setAttribute("img", img);
+		dispatcher("patient-dashboard.jsp", request, response);
+	}
 	
-
 }

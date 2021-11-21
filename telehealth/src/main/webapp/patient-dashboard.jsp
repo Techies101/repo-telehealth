@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8"%>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,133 +117,124 @@ table td{
 							 	<button id="view${a.meetingNumber}" class="btn btn-primary">View</button>					 	
 					            <button id="upload${a.meetingNumber}" class="btn btn-primary">Upload</button>
 							</c:if>
-									<script>
-        	
-									var a = document.getElementById('upload'+${a.meetingNumber});
-									if(a){
-									//FOR UPLOADING									
-        document.getElementById('upload'+${a.meetingNumber}).addEventListener('click', function(){
-        	(async () => {
-
-        		const { value: file } = await Swal.fire({
-        		  title: 'Select image',
-        		  input: 'file',
-        		  inputAttributes: {
-        		    'accept': 'image/*',
-        		    'aria-label': 'Upload your profile picture'
-        		  }
-        		})
-
-        		if (file) {
-        		  const reader = new FileReader()
-        		  reader.onload = (e) => {
-        		    Swal.fire({
-        		      title: 'Your uploaded picture',
-        		      imageUrl: e.target.result,
-        		      imageAlt: 'The uploaded picture'
-        		    })
-        		  }
-        		  reader.readAsDataURL(file)
-        		}
-        	    var formData = new FormData();
-    			
-    			formData.append("imageId", ${a.meetingNumber});
-    			formData.append("image", file);
-    			fetch ('http://localhost:8080/telehealth/uploadImage',{
-    				method: 'POST',
-					body: formData
-    			})
-    			location.reload()
-        		})()
-        		
-
-        	});
-			}
-</script>
-									
-<script>
-			var a = document.getElementById('view'+${a.meetingNumber});
-			if(a){
 							
-		//FOR VIEWING									
-        document.getElementById('view'+${a.meetingNumber}).addEventListener('click', function(){
-
-        	Swal.fire({
-        		  title: 'Proof of payment',
-        		  imageUrl: '_getImage.jsp?id='+${a.meetingNumber},
-        		  imageAlt: 'No Image Uploaded Yet',
-            	  confirmButtonColor: '#1c87c9'
-        		})
-			
-        	});
+							<script>
+								var a = document.getElementById('upload'+${a.meetingNumber});
+								if(a){
+									
+								//FOR UPLOADING									
+						        document.getElementById('upload'+${a.meetingNumber}).addEventListener('click', function(){
+						        	(async () => {
+						
+						        		const { value: file } = await Swal.fire({
+						        		  title: 'Select image',
+						        		  input: 'file',
+						        		  inputAttributes: {
+						        		    'accept': 'image/*',
+						        		    'aria-label': 'Upload your profile picture'
+						        		  }
+						        		})
+						
+						        		if (file) {
+						        		  const reader = new FileReader()
+						        		  reader.onload = (e) => {
+						        		    Swal.fire({
+						        		      title: 'Your uploaded picture',
+						        		      imageUrl: e.target.result,
+						        		      imageAlt: 'The uploaded picture'
+						        		    })
+						        		  }
+						        		  reader.readAsDataURL(file)
+						        		}
+						        	    var formData = new FormData();
+						    			
+						    			formData.append("imageId", ${a.meetingNumber});
+						    			formData.append("image", file);
+						    			fetch ('http://localhost:8080/telehealth/uploadImage',{
+						    				method: 'POST',
+											body: formData
+						    			})
+						    			location.reload()
+						        		})()
+						        		
+						
+						        	});
 									}
-</script>
-									
-									
-<script>
-		//FOR DECLINE W/ REASON
-        document.getElementById('cancel'+${a.meetingNumber}).addEventListener('click', function(){
-
-        	Swal.fire({
-        	  title: 'Are you sure?',
-        	  text: "Reason for appointment cancellation",
-        	  input: 'text',
-        	  inputAttributes: {
-        		    autocapitalize: 'off'
-        		  },
-        	  icon: 'warning',
-        	  showCancelButton: true,
-        	  confirmButtonColor: '#1c87c9',
-        	  cancelButtonColor: '#d33',
-        	  confirmButtonText: 'Cancel Meeting'
-        	}).then((result) => {
-        	  if (result.isConfirmed) {
-        	    Swal.fire(
-        	      'Cancelled!',
-        	      'Your appointment has been cancelled.',
-        	      'success'
-        	    )
-        	    
-        	    var formData = new FormData();
-    			
-    			formData.append("message", result.value);
-    			formData.append("drop", ${a.meetingNumber});
-    			
-    			fetch ('http://localhost:8080/telehealth/drop',{
-    				method: 'POST',
-					body: formData
-    			})
-    			location.reload()
-        	  }
-
-        	});
-        })
-</script>
-							</td>
+						</script>
+										
+						<script>
+							var a = document.getElementById('view'+${a.meetingNumber});
+							if(a){
+								
+							//FOR VIEWING									
+					        document.getElementById('view'+${a.meetingNumber}).addEventListener('click', function(){
+					        	consol.log("Hello World!")
+							})
+						</script>
+										
+										
+						<script>
+								//FOR DECLINE W/ REASON
+						        document.getElementById('cancel'+${a.meetingNumber}).addEventListener('click', function(){
+						        	Swal.fire({
+						        	  title: 'Are you sure?',
+						        	  text: "Reason for appointment cancellation",
+						        	  input: 'text',
+						        	  inputAttributes: {
+						        		    autocapitalize: 'off'
+						        		  },
+						        	  icon: 'warning',
+						        	  showCancelButton: true,
+						        	  confirmButtonColor: '#1c87c9',
+						        	  cancelButtonColor: '#d33',
+						        	  confirmButtonText: 'Cancel Meeting'
+						        	}).then((result) => {
+						        	  if (result.isConfirmed) {
+						        	    Swal.fire(
+						        	      'Cancelled!',
+						        	      'Your appointment has been cancelled.',
+						        	      'success'
+						        	    )
+						        	    
+						        	    var formData = new FormData();
+						    			
+						    			formData.append("message", result.value);
+						    			formData.append("drop", ${a.meetingNumber});
+						    			
+						    			fetch ('http://localhost:8080/telehealth/drop',{
+						    				method: 'POST',
+											body: formData
+						    			})
+						    			location.reload()
+						        	  }
+						
+						        	});
+						        })
+						</script>
+						</td>
+						
 						</c:when>
-						<c:when test="${a.meetingStatus == 'Declined'}">
-						<td><c:out value="${a.meetingComment}" /></td>
-						</c:when>
+							<c:when test="${a.meetingStatus == 'Declined'}">
+								<td><c:out value="${a.meetingComment}" /></td>
+							</c:when>
 						
 						<c:otherwise>
-						<c:if test="${a.meetingLink != null && a.meetingStatus != 'Done' }">
-						<td><c:out value="" /></td>
-						</c:if>
+							<c:if test="${a.meetingLink != null && a.meetingStatus != 'Done' }">
+								<td><c:out value="" /></td>
+							</c:if>
 						</c:otherwise>
 						
 						</c:choose>
-						
 						<c:if test="${a.meetingStatus == 'Done'}">
-						<td>
-						<input type="button" onclick="location.href='https://${a.meetingLink}';" class="btn btn-primary" value="Link"/>
-						</td>
+							<td>
+							<input type="button" onclick="location.href='https://${a.meetingLink}';" class="btn btn-primary" value="Link"/>
+							</td>
 						</c:if>
 					</tr>
 				</c:if>
 			</c:forEach>
 		</tbody>
 	</table>
-	
 	<div class="d-flex">
 		<button onclick="location.href='appointment'"  class="btn btn-primary mt-4 "><i class="fa fa-calendar-plus"></i> Request Appointment</button>
 	</div>
@@ -251,8 +242,6 @@ table td{
 
 
 	<%@include file="includes/_linksfooter.jsp"%>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="assets/js/modal.js"></script>
 </html>

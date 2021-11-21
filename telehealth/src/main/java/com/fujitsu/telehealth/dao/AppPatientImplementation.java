@@ -1,5 +1,6 @@
 package com.fujitsu.telehealth.dao;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -237,15 +239,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String remarks = rs.getString("th_remarks");
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
-				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
-				// response.setContentType("image/gif");
-				// OutputStream os = r.getOutputStream();
-				// os.write(byteArray);
-				// os.flush();
-				// os.close();
-
-				// Part image = rs.getInt("th_id");
-
 				listRequest.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks,
 						number, blob));
 			}
@@ -352,6 +345,40 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			con.close();
 		}
 		return lab;
+	}
+
+	@Override
+	public String getImage(String id) throws SQLException, IOException {
+		Connection con = null;
+		String base64Image = null;
+		
+		try {
+			con = DBConnection.connect();
+			PreparedStatement ps = con.prepareStatement(SQL_GET_UPLOADED_IMAGE);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Blob blob = rs.getBlob("th_image");
+				InputStream inputStream = blob.getBinaryStream();
+				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				byte[] buffer = new byte[4096];
+				int bytesRead = -1;
+
+				while ((bytesRead = inputStream.read(buffer)) != -1) {
+					outputStream.write(buffer, 0, bytesRead);
+				}
+
+				byte[] imageBytes = outputStream.toByteArray();
+				base64Image = Base64.getEncoder().encodeToString(imageBytes);
+				inputStream.close();
+				outputStream.close();
+			}
+		} catch (SQLException e) {
+			DBConnection.printSQLException(e);
+		} finally {
+			con.close();
+		}
+		return base64Image;
 	}
 
 }

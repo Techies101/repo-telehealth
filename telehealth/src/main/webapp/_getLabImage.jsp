@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.Blob"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.sql.ResultSet"%>
@@ -27,6 +27,7 @@
             
         } else {
             System.out.println("No image found with this id.");
+            System.out.println("Hello");
         }
     } catch (Exception e) {
         out.println(e);

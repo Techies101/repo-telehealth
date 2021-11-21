@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8"%>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patient Registration</title>
-<%@include file="includes/_linkshead.jsp"%>
-<link rel="stylesheet" href="assets/stylesheet/header.css">
-<link rel="stylesheet" href="assets/stylesheet/register.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Patient Registration</title>
+	<%@include file="includes/_linkshead.jsp"%>
+	<link rel="stylesheet" href="assets/stylesheet/header.css">
+	<link rel="stylesheet" href="assets/stylesheet/register.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
-
 	<%
 	String uid = (String) session.getAttribute("uid");
 	if (uid != null) {
